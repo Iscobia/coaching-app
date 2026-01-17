@@ -1,3 +1,4 @@
+// Enregistrement du service worker
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("sw.js")
@@ -6,13 +7,14 @@ if ("serviceWorker" in navigator) {
   });
 }
 
+// Détection navigateur
 const ua = navigator.userAgent;
-
 const isIOS = /iPhone|iPad|iPod/i.test(ua);
 const isAndroid = /Android/i.test(ua);
 const isSafari = /^((?!chrome|android).)*safari/i.test(ua);
 const isChrome = /Chrome/i.test(ua);
 
+// Affichage avertissement si mauvais navigateur
 function showBrowserWarning(message) {
   const div = document.createElement("div");
   div.innerHTML = `
@@ -29,9 +31,7 @@ function showBrowserWarning(message) {
     ">
       <div style="max-width:400px; text-align:center;">
         <p>${message}</p>
-        <button onclick="this.parentNode.parentNode.remove()">
-          J’ai compris
-        </button>
+        <button onclick="this.parentNode.parentNode.remove()">J’ai compris</button>
       </div>
     </div>
   `;
@@ -39,13 +39,8 @@ function showBrowserWarning(message) {
 }
 
 if (isIOS && !isSafari) {
-  showBrowserWarning(
-    "Je remarque que Safari n’est pas ton navigateur principal. L’application peut ne pas fonctionner correctement sur un autre navigateur."
-  );
+  showBrowserWarning("Je remarque que Safari n’est pas ton navigateur principal. L’application peut ne pas fonctionner correctement sur un autre navigateur.");
 }
-
 if (isAndroid && !isChrome) {
-  showBrowserWarning(
-    "Je remarque que Chrome n’est pas ton navigateur principal. L’application peut ne pas fonctionner correctement sur un autre navigateur."
-  );
+  showBrowserWarning("Je remarque que Chrome n’est pas ton navigateur principal. L’application peut ne pas fonctionner correctement sur un autre navigateur.");
 }
