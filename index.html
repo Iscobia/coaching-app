@@ -1,27 +1,50 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Défis quotidiens – Sekhamet</title>
-
-  <!-- Manifest PWA -->
-  <link rel="manifest" href="manifest.json">
-
-  <!-- Couleur thème -->
-  <meta name="theme-color" content="#1f1f1f">
-
-  <!-- OneSignal SDK -->
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-
-  <!-- App scripts -->
-  <script defer src="app.js"></script>
-  <script defer src="notifications.js"></script>
-  <script defer src="calendar.js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Défis quotidiens - Sekhamet</title>
+    <!-- Manifest pour PWA -->
+    <link rel="manifest" href="manifest.json">
+    <!-- CSS de base -->
+    <style>
+        body { font-family: sans-serif; margin: 0; padding: 0; background: #f5f7fa; color: #333; }
+        #calendar-icon { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #466c91; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; color: white; font-size: 30px; }
+        #calendar-overlay { display: none; position: fixed; inset: 0; background: #000000cc; color: white; z-index: 9999; padding: 20px; overflow-y: auto; }
+        #calendar-overlay button { margin-top: 15px; }
+    </style>
 </head>
 <body>
-  <div id="app"></div>
+    <h1>Bienvenue dans ton application de défis quotidiens</h1>
+    <p>Choisis ton programme et configure ton défi quotidien.</p>
+
+    <div id="calendar-icon">🗓️</div>
+    <div id="calendar-overlay">
+        <h2>Paramètres du défi</h2>
+        <label>Programme :
+            <select id="program-select">
+                <option value="ENVOL">ENVOL</option>
+                <option value="ENVELOPPE">ENVELOPPE</option>
+                <option value="EMERGENCE">EMERGENCE</option>
+                <option value="ORIGINE">ORIGINE</option>
+            </select>
+        </label>
+        <br><br>
+        <label>Heure notification :
+            <input type="time" id="notif-time" value="08:00" min="04:00" max="20:00">
+        </label>
+        <br><br>
+        <label>Commencer au jour :
+            <input type="number" id="start-day" value="1" min="1" max="77">
+        </label>
+        <br><br>
+        <button id="save-settings">Sauvegarder</button>
+        <button id="close-calendar">Fermer</button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+    <script src="calendar.js"></script>
+    <script src="notifications.js"></script>
 </body>
 </html>
